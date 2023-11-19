@@ -10,16 +10,16 @@ class Queue:
         self.customers.append(customer)
 
     def dequeue(self):
-        if self.is_empty():
+        if self.isEmpty():
             return None
         return self.customers.pop(0)
 
     def peek(self):
-        if self.is_empty():
+        if self.isEmpty():
             return None
         return self.customers[0]
 
-    def is_empty(self):
+    def isEmpty(self):
         return len(self.customers) == 0
 
     def __len__(self):

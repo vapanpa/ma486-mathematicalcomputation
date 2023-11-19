@@ -4,19 +4,18 @@ import matplotlib.pyplot as plt
 
 class Customer:
     def __init__(self, arrivalTime, number):
-        self.Atime = arrivalTime
+        self.arrival_time = arrivalTime
         self.number = number
-        self.Dtime = -1
-
+        self.departure_time = -1
 
     def __repr__(self):
-        return f"Customer({self.time:.3f})"
+        return "Customer({:.3f})".format(self.arrival_time)
 
     def __str__(self):
-        return f"{self.number}:{self.Atime:.3f},{self.Dtime:.3f}"
+        return "{}:{:.3f},{:.3f}".format(self.number, self.arrival_time, self.departure_time)
 
     def getTime(self):
-        return self.Atime
+        return self.arrival_time
 
     def __eq__(self, other):
         if type(other) != Customer:

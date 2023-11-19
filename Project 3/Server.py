@@ -27,7 +27,7 @@ class Server:
 
         self.busy = True
 
-    def serve(self, cust, arrive_time):
+    def serve(self, cust, arrivalTime):
         self.makeBusy()
         self.customer = cust
         self.customerNumber = cust.number
@@ -36,8 +36,11 @@ class Server:
         cust.Dtime = cust.Atime + timeServe
         return cust.Dtime
 
-    def __lt__(self,other):
+    def __lt__(self, other):
         return self.rate < other.rate
 
-    def __gt__(self,other):
+    def __gt__(self, other):
         return self.rate > other.rate
+
+
+# CITATIONS:
