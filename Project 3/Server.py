@@ -10,31 +10,29 @@ class Server:
         self.customer = None
         self.customerNumber = None
 
-
     def __repr__(self):
         return f"Server {self.number}: Customer=>{self.customer}; Busy=>{self.busy}; ServiceRate=>{1/self.rate:.3f}"
 
-
-    def isBusy(self):
+    def occupied(self):
         return self.busy
 
-    def freeUp(self):
+    def unOccupied(self):
         self.busy = False
         self.customer = None
         self.customerNumber = None
 
-    def makeBusy(self):
+    def beginService(self):
 
         self.busy = True
 
     def serve(self, cust, arrivalTime):
-        self.makeBusy()
+        self.beginService()
         self.customer = cust
         self.customerNumber = cust.number
         np.random.seed(220)
         timeServe = np.random.exponential(self.rate,1)[0]
-        cust.Dtime = cust.Atime + timeServe
-        return cust.Dtime
+        cust.departure_time = cust.arrival_time + timeServe
+        return cust.departure_time
 
     def __lt__(self, other):
         return self.rate < other.rate

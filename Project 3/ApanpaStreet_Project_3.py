@@ -7,25 +7,28 @@ from Queue import Queue
 def customerArrival(arrivalRate, maxTime):
     np.random.seed(1000)
     timing = 0
-    cust = 1
+    customerID = 1
     customerList = Event_List()
 
     while timing <= maxTime:
         arrival = timing + np.random.exponential(arrivalRate)
         if arrival > maxTime:
             break
-        customerList.addEvent(arrival, Customer(arrival, cust), "Arrival")
-        cust = cust + 1
+        customerList.addEvent(arrival, Customer(arrival, customerID), "Arrival")
+        customerID = customerID + 1
         timing = arrival
 
     return customerList
 
 
 # CITATIONS:
+# Jake LaPorte. "MA486_Lsn28_1." Youtube, 11 Dec. 2020, www.youtube.com/watch?v=QQDkKN79zAg
+# Jake LaPorte. "MA486_Lsn28_2." Youtube, 11 Dec. 2020, www.youtube.com/watch?v=VR9PaJ6_u6I
+
 
 def availability(serverList):
     for i, server in enumerate(serverList):
-        if not server.isBusy():
+        if not server.occupied():
             return [True, i]
     return [False]
 
@@ -54,15 +57,15 @@ def simulate(filename, serverAmount, serverRates):
             elif event == "Departure":
                 server = customerServer(serverList, customer)
                 if server:
-                    server.freeUp()
+                    server.unOccupied()
                     if not customerQueue.isEmpty():
                         nextCustomer = customerQueue.dequeue()
                         endTime = server.serve(nextCustomer, eventTime)
                         customerEvent.addEvent(endTime, nextCustomer, "Departure")
 
             print(customerEvent, file = outfile)
-            for x in serverList:
-                print(x, file = outfile)
+            for item in serverList:
+                print(item, file = outfile)
             print("=====Customer Line ===============\n", file = outfile)
             print(customerQueue, file = outfile)  # Print the queue state
             if eventTime >= 100:

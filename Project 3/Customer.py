@@ -17,6 +17,10 @@ class Customer:
     def getTime(self):
         return self.arrival_time
 
+# CITATION:
+    # Difference Between “__Eq__” VS “is” VS “==” in Python. www.tutorialspoint.com/difference-between-eq-vs-is-vs-in-python#:~:
+    # text=The%20__eq__%20method%20in%20Python%20is%20used%20to,value(True%20or%20False).
+
     def __eq__(self, other):
         if type(other) != Customer:
             return False
